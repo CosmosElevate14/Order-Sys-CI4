@@ -251,11 +251,34 @@ class Users extends BaseController
             // $email = $request->getPost('email');
             // $address = $orderType === 'delivery' ? $request->getPost('address') : null;
             $orderType = $request->getPost('order_type');
-            $address = $orderType === 'delivery' ? $session->get('address') : null;
+            $address = $orderType === 'delivery' ? $request->getPost('address') : null;
+            $desiredDate = $request->getPost('desired_date');
+            $desiredTime = $request->getPost('desired_time');
+            $transactionId = $request->getPost('transaction_id');
 
 
-            if (!$orderType) {
-                $session->setFlashdata('error', 'Please select order method.');
+            if ($orderType === 'delivery' && empty($address)) {
+                $session->setFlashdata('error', 'Please provide delivery address.');
+                return redirect()->to('/cart');
+            }
+
+            if (empty($desiredDate) || empty($desiredTime)) {
+                $session->setFlashdata('error', 'Please select a valid date and time.');
+                return redirect()->to('/cart');
+            }
+            
+            $validTimes = [
+                '09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
+                '01:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM'
+            ];
+
+            if (!in_array($desiredTime, $validTimes)) {
+                $session->setFlashdata('error', 'Invalid time selected. Please choose a time between 9:00 AM and 5:00 PM.');
+                return redirect()->to('/cart');
+            }
+            
+            if (empty($transactionId)) {
+                $session->setFlashdata('error', 'Please enter your GCash Transaction ID.');
                 return redirect()->to('/cart');
             }
 
@@ -288,7 +311,10 @@ class Users extends BaseController
                     'order_type' => $orderType,
                     'created_at' => date('Y-m-d H:i:s'),
                     'quantity' => $totalQuantity,
-                    'total' => $total
+                    'total' => $total,
+                    'desired_date' => $desiredDate,
+                    'desired_time' => $desiredTime,
+                    'transaction_id' => $transactionId
                 ]);
                 $orderID = $orderModel->getInsertID();
 

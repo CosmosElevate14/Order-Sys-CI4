@@ -1,5 +1,19 @@
     <section>
         <div class="container pb-5">
+            <!-- Notice Here -->
+            <div class="card shadow-sm mb-4 border-warning">
+                <div class="card-body bg-warning bg-opacity-25 text-center rounded-3">
+                    <h6 class="fw-bold text-dark mb-2">
+                        📢 Advance Order Reminder
+                    </h6>
+                    <p class="mb-0 text-secondary">
+                        We want to make sure your order arrives exactly when you need it!
+                        <br>
+                        <span class="text-danger fw-semibold">Please place your order at least <u>two (2) days in advance</u></span>
+                        so we can prepare everything perfectly for you. 🎂✨
+                    </p>
+                </div>
+            </div>
             <h4 class="mt-4  text-center"><strong>Menu</strong></h4>
             <form class="my-4 w-25" action="<?= site_url('/home') ?>" method="post">
                 <div class="d-flex align-items-center gap-2">
