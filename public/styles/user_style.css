@@ -1,0 +1,150 @@
+.search-container {
+    border: 1px solid black;
+    display: flex;
+    align-items: start;
+    justify-items: start;
+    gap: 10;
+}
+.container {
+    margin-bottom: 5vh;
+}
+
+#login-container {
+    height: 100dvh;
+}
+
+.form-floating {
+    /* border: 1px solid black; */
+    width: 40dvw;
+}
+
+/* Apply background color to the whole page */
+body {
+    background-color: #f8f9fa; /* Light grey background */
+    font-family: Arial, sans-serif; /* Ensuring consistent font family */
+}
+
+/* Style the navbar background color */
+.navbar {
+    background-color: #8D6E63; /* Brown background for navbar */
+    border-bottom: 1px solid #5D4037; /* Dark brown bottom border */
+}
+
+/* Style the menu tabs (nav-tabs) */
+.nav-tabs {
+    background-color: #5D4037; /* Dark brown background for the tabs */
+    border: none; /* Remove default borders */
+    display: flex; /* Flex layout for horizontal tab items */
+    justify-content: center; /* Center the tab items */
+}
+
+/* Style for each individual tab (li elements) */
+.nav-tabs li {
+    flex: 1; /* Allow each tab to grow equally */
+    text-align: center; /* Center text inside the tabs */
+    list-style-type: none; /* Remove default list style */
+    padding: 10px; /* Added padding for better click area */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/* Active tab style */
+.nav-tabs li.active {
+    background-color: #8D6E63; /* Brown background for active tab */
+    color: white; /* White text for active tab */
+}
+
+/* Hover effect for tabs */
+.nav-tabs li:hover {
+    background-color: #5D4037; /* Dark brown on hover */
+    cursor: pointer; /* Show pointer cursor */
+    color: white; /* White text on hover */
+}
+
+/* Style the container for content inside the tabs */
+.container {
+    background-color: #ffffff; /* White background for the content area */
+    border-radius: 10px; /* Rounded corners for the container */
+    padding: 20px; /* Padding inside the container */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow around the container */
+}
+
+/* Style the panel elements */
+.panel-default {
+    border: 1px solid #8D6E63; /* Brown border for panels */
+    border-radius: 5px; /* Rounded corners for panels */
+}
+
+/* Style the panel body */
+.panel-body {
+    padding: 15px;
+    text-align: center;
+}
+
+/* Style the panel footer */
+.panel-footer {
+    background-color: #8D6E63; /* Brown footer background */
+    border-top: 1px solid #5D4037; /* Dark brown top border */
+    padding: 10px;
+}
+
+/* Add hover effect to the panels */
+.panel-default:hover {
+    transform: scale(1.03); /* Slightly enlarge the panel on hover */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+}
+
+/* Modal */
+.modal {
+    max-width: 500px;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.modal-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.modal img {
+    max-width: 200px;
+    margin-bottom: 15px;
+}
+
+.modal .form-control {
+    margin-bottom: 15px;
+}
+
+.modal button {
+    margin-top: 10px;
+}
+
+.modal a.btn {
+    margin-top: 10px;
+    display: inline-block;
+    text-align: center;
+}
+
+
+/* Navbar Brand (Logo) */
+.navbar .navbar-brand {
+    font-size: 26px; /* Slightly larger font size */
+    color: #5D4037; /* Dark brown color for brand */
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.navbar .navbar-brand:hover {
+    color: #8D6E63; /* Brown color on hover */
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #5D4037; /* Dark brown icon bars */
+}
+
+    

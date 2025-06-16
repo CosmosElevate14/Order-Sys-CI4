@@ -1,0 +1,89 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('../upload/header-for-bailiwick-kakanin-blog.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-color: rgb(0, 0, 0); /* Removing any solid color transparency */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Login Container */
+#login-container {
+    background-size: cover; /* Ensures the background image covers the container */
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(255, 255, 255, 0.438); /* Slightly reduced box shadow opacity */
+    padding: 40px; /* Increased padding */
+    width: 100%;
+    max-width: 500px; /* Increased width */
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.11); /* Increased transparency for the background */
+    backdrop-filter: blur(10px); /* Added blur effect to the container */
+}
+
+/* Adding a blur effect to the background */
+#login-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit; /* Inherit background from the container */
+    filter: blur(8px); /* Apply blur */
+    z-index: -1; /* Make sure the blur effect stays behind the content */
+}
+
+/* Logo styling */
+#logo {
+    display: block;
+    width: 300px; /* Adjust size as needed */
+    margin: 0 auto 20px; /* Center the logo and add space below */
+}
+
+/* Form Container */
+#form-container {
+    width: 100%;
+}
+
+/* Heading */
+h3 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 28px; /* Increased font size for heading */
+    font-weight: bold;
+}
+
+/* Input Fields */
+.form-control {
+    height: 55px; /* Increased height for inputs */
+    padding: 15px;
+    font-size: 18px; /* Increased font size for inputs */
+}
+
+label {
+    font-size: 16px; /* Increased label font size */
+    color: #666;
+}
+
+/* Button */
+button {
+    height: 55px; /* Increased button height */
+    font-size: 18px; /* Increased button font size */
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
