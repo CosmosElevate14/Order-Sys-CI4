@@ -28,6 +28,24 @@
     <div class="app-content">
         <div class="container-fluid">
             <div style="margin-top:10px;">
+                <?php if (strtolower($status) === 'confirmed'): ?>
+                    <form id="filterForm" class="row g-2 mb-3 no-print">
+                        <div class="col-md-3">
+                            <label for="filterDate">Select Date</label>
+                            <input type="date" id="filterDate" class="form-control" required>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-end">
+                            <button class="btn btn-primary btn-sm" type="submit" title="Filter">
+                                <i class="bi bi-funnel"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="button" onclick="downloadPDF()" class="btn btn-danger">
+                                <i class="bi bi-file-earmark-pdf"></i> Download PDF
+                            </button>
+                        </div>
+                    </form>
+                <?php endif; ?>
                 <?php if (!empty($orders)): ?>
                 <table class="table table-striped table-bordered">
                     <thead>
@@ -36,6 +54,9 @@
                         <th>Order Type</th>
                         <th>Quantity</th>
                         <th>Total</th>
+                        <th>GCash Transaction ID</th>
+                        <th>Desired Time</th>
+                        <th>Desired Date</th>
                         <th>
                             
                             <?php if (strtolower($status) === 'pending'): ?>
@@ -75,6 +96,36 @@
                                 <td><?= esc($order['quantity']) ?></td>
                                 <td>&#x20B1;<?= esc($order['total']) ?></td>
                                 <td>
+                                    <?= esc($order['transaction_id'] ?? 'N/A') ?>
+
+                                    <?php if (!empty($order['transaction_id'])): ?>
+                                        <!-- Search input to verify GCash Transaction ID -->
+                                        <input
+                                            type="text"
+                                            class="form-control form-control-sm d-inline-block"
+                                            style="width: 150px; margin-left: 10px;"
+                                            placeholder="Search GCash ID"
+                                            oninput="checkGCashMatch(this, '<?= esc($order['transaction_id']) ?>')"
+                                        >
+                                        <span class="badge bg-secondary" id="status-<?= esc($order['id']) ?>" style="margin-left: 5px;">Waiting</span>
+
+                                        <script>
+                                            function checkGCashMatch(input, actualID) {
+                                                const statusSpan = input.nextElementSibling;
+                                                if (input.value.trim() === actualID) {
+                                                    statusSpan.textContent = "Matched (Paid)";
+                                                    statusSpan.className = "badge bg-success";
+                                                } else {
+                                                    statusSpan.textContent = "Not Matched";
+                                                    statusSpan.className = "badge bg-danger";
+                                                }
+                                            }
+                                        </script>
+                                    <?php endif; ?>
+                                </td>
+                                <td><?= esc($order['desired_time']) ?></td>
+                                <td><?= esc($order['desired_date']) ?></td>
+                                <td>
                                     <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#viewOrderModal<?= $order['id'] ?>">
                                         <span class="bi bi-eye"></span> View
                                     </button>
@@ -88,11 +139,23 @@
                                         </a>
                                         
                                     <?php elseif (strtolower($status) === 'confirmed'): ?>
+                                        <a href="<?= site_url('admin/order/ready/' . $order['id']) ?>" class="btn btn-success btn-sm">
+                                            <span class="bi bi-box-seam"></span> Product Ready
+                                        </a>
+                                        <a href="<?= site_url('admin/order/complete/' . $order['id']) ?>" class="btn btn-secondary btn-sm">
+                                            <span class="bi bi-check2-circle"></span> Done
+                                        </a>
+                                    <?php elseif (strtolower($status) === 'declined'): ?>
+
+                                        <a href="<?= site_url('admin/order/unpaid/' . $order['id']) ?>" class="btn btn-warning btn-sm">
+                                            <span class="bi bi-wallet"></span> Not Paid
+                                        </a>
+                                    <?php elseif (strtolower($status) === 'confirmed'): ?>
                                         <a href="<?= site_url('admin/order/pay/' . $order['id']) ?>" class="btn btn-primary btn-sm">
                                             <span class="bi bi-wallet"></span> Paid
                                         </a>
                                         <a href="<?= site_url('admin/order/ready/' . $order['id']) ?>" class="btn btn-success btn-sm">
-                                            <span class="bi bi-envelope"></span> Product Ready
+                                            <span class="bi bi-envelope"></span> Product Ready213
                                         </a>
                                     <?php elseif (strtolower($status) === 'declined'): ?>
 
@@ -101,11 +164,8 @@
                                         </a>
                                     <?php endif; ?>
                                     <!-- View Button -->
-                                    
                                 </td>
                             </tr>
-
-                            
                         <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -174,3 +234,57 @@
         </div>
     </div>
 </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+    // JavaScript: Filter the Confirmed Orders Table
+    document.getElementById('filterForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const selectedDate = document.getElementById('filterDate').value;
+        if (!selectedDate) return;
+
+        const rows = document.querySelectorAll('#confirmedOrdersTable tbody tr');
+        rows.forEach(row => {
+            const dateCell = row.querySelector('td:nth-child(2)');
+            const rowDate = dateCell.textContent.trim();
+            row.style.display = (rowDate === selectedDate) ? '' : 'none';
+        });
+    });
+
+    // JavaScript: Download PDF of Filtered Table
+    function downloadPDF() {
+        const selectedDate = document.getElementById('filterDate').value;
+        if (!selectedDate) {
+            alert("Please select a date before downloading the PDF.");
+            return;
+        }
+
+        const table = document.getElementById('confirmedOrdersTable');
+        const noPrintElements = document.querySelectorAll('.no-print');
+        noPrintElements.forEach(el => el.style.display = 'none');
+
+        html2canvas(table).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const imgProps = pdf.getImageProperties(imgData);
+            const imgHeight = (imgProps.height * pageWidth) / imgProps.width;
+
+            pdf.setFontSize(12);
+            pdf.text(`Confirmed Orders`, 10, 10);
+            pdf.text(`Date: ${selectedDate}`, 10, 18);
+            pdf.addImage(imgData, 'PNG', 5, 25, pageWidth - 10, imgHeight);
+
+            pdf.save(`confirmed-orders-${selectedDate}.pdf`);
+        }).finally(() => {
+            noPrintElements.forEach(el => el.style.display = '');
+        });
+    }
+</script>
+
+</body>
+</html>
