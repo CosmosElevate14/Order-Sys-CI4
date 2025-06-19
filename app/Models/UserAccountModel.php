@@ -11,4 +11,9 @@ class UserAccountModel extends Model
     public function getCustomersData(){
         return $this->findAll();
     }
+
+    public function getCustomerAddress($userId)
+    {
+        return $this->where('id', $userId)->first();
+    }
 }

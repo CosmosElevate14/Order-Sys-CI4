@@ -449,12 +449,12 @@ class Admin extends Controller
 
         if (!empty($date)) {
             $orders = $orderModel
-                ->where('order_status', 'Done')
+                ->where('payment_status', 'Confirmed')
                 ->where('DATE(created_at)', $date) // MySQL DATE() function
                 ->findAll();
         } else {
             $orders = $orderModel
-                ->where('order_status', 'Done')
+                ->where('payment_status', 'Confirmed')
                 ->findAll();
         }
 

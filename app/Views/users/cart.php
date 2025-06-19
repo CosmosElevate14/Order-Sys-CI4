@@ -80,12 +80,6 @@
                             </select>
                         </div>
 
-                        <!-- Delivery Address -->
-                        <div class="mb-3 d-none" id="addressField">
-                            <label for="address" class="form-label">Delivery Address</label>
-                            <textarea class="form-control" name="address" id="address" rows="2"></textarea>
-                        </div>
-
                         <div class="mb-3 d-none" id="pickup_info">
                             <p class="fw-bold">Pick-up Location:</p>
                             <p class="text-muted">Apollo XIII Pastry Shop, Main Street, City</p>

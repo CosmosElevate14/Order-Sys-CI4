@@ -226,17 +226,20 @@ class Users extends BaseController
     public function checkout() {
             $request = \Config\Services::request();
             $db = \Config\Database::connect();
+            $customerModel = new UserAccountModel();
             $session = session();
             if (!$session->get('isLoggedIn')) {
                 $session->setFlashdata('error', 'Please login first.');
                 return redirect()->to('/home');
+            
             }
             $user_id = $session->get('user_id');
             $firstName = $session->get('first_name');
             $lastName = $session->get('last_name');
             $email = $session->get('email');
             
-            
+            $customerData = $customerModel->getCustomerAddress($user_id);
+
             
             $cartModel = new CartModel();
             $orderModel = new OrderModel();
@@ -251,7 +254,7 @@ class Users extends BaseController
             // $email = $request->getPost('email');
             // $address = $orderType === 'delivery' ? $request->getPost('address') : null;
             $orderType = $request->getPost('order_type');
-            $address = $orderType === 'delivery' ? $request->getPost('address') : null;
+            $address = $orderType === 'delivery' ? $customerData['address'] : null;
             $desiredDate = $request->getPost('desired_date');
             $desiredTime = $request->getPost('desired_time');
             $transactionId = $request->getPost('transaction_id');
