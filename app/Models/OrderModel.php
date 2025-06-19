@@ -19,7 +19,7 @@ class OrderModel extends Model
 
     public function getTotalSales(){
         return $this->selectSum('total')
-                ->where('order_status', 'Done')
+                ->where('payment_status', 'Confirmed')
                 ->get()
                 ->getRow()
                 ->total;
