@@ -400,3 +400,48 @@ Stack trace:
 DEBUG - 2025-06-19 05:54:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-06-19 05:54:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-06-19 05:54:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:35:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:35:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:35:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:35:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:35:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-06-19 06:35:23 --> mysqli_sql_exception: Table 'simpleordersystem.feedback' doesn't exist in C:\Users\Charles Laurence\Documents\System_CI\Order-Sys-CI4\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Charles Laurence\Documents\System_CI\Order-Sys-CI4\system\Database\MySQLi\Connection.php(327): mysqli->query()
+#1 C:\Users\Charles Laurence\Documents\System_CI\Order-Sys-CI4\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute()
+#2 C:\Users\Charles Laurence\Documents\System_CI\Order-Sys-CI4\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery()
+#3 C:\Users\Charles Laurence\Documents\System_CI\Order-Sys-CI4\system\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query()
+#4 C:\Users\Charles Laurence\Documents\System_CI\Order-Sys-CI4\app\Controllers\Admin.php(39): CodeIgniter\Database\BaseBuilder->countAllResults()
+#5 C:\Users\Charles Laurence\Documents\System_CI\Order-Sys-CI4\system\CodeIgniter.php(933): App\Controllers\Admin->dashboard()
+#6 C:\Users\Charles Laurence\Documents\System_CI\Order-Sys-CI4\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController()
+#7 C:\Users\Charles Laurence\Documents\System_CI\Order-Sys-CI4\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest()
+#8 C:\Users\Charles Laurence\Documents\System_CI\Order-Sys-CI4\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\Charles Laurence\Documents\System_CI\Order-Sys-CI4\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+#10 C:\Users\Charles Laurence\Documents\System_CI\Order-Sys-CI4\public\index.php(59): CodeIgniter\Boot::bootWeb()
+#11 C:\Users\Charles Laurence\Documents\System_CI\Order-Sys-CI4\system\rewrite.php(44): require_once('...')
+#12 {main}
+DEBUG - 2025-06-19 06:35:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:42:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:42:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:44:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:44:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:44:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:44:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:45:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:50:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:53:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:55:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:55:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:56:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:56:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 06:59:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 07:00:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 07:01:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 07:02:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 07:02:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 07:03:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 07:05:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 07:08:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 07:08:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 07:08:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-19 07:08:41 --> Order Status Pending
