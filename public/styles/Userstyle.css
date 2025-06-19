@@ -6,7 +6,7 @@ body {
   background: linear-gradient(135deg, #FFDAB9, #f8e38f); /* #FFDAB9 (Soft Peach) to #f8e38f (your current start) */
 
   /* Font: Prioritize Poppins for a modern, friendly feel, with Segoe UI as fallback */
-  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
   /* Default Text Color: Rich Chocolate Brown for excellent readability and theme consistency */
   color: #6B4423; /* Rich Chocolate Brown */
@@ -121,4 +121,29 @@ body {
   border-radius: 50rem !important;
   padding-left: 1.5rem !important;
   padding-right: 1.5rem !important;
+}
+
+#login-card {
+max-width: 400px;
+width: 100%;
+border-radius: 20px;
+box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
+}
+
+.btn-primary {
+font-weight: 500;
+}
+
+.btn-primary:hover {
+background-color: #0056b3;
+}
+
+.modal-content {
+    transition: 0.3s ease-in-out;
+}
+.modal-header h5 {
+    font-size: 1.25rem;
+}
+.btn-success:hover {
+    background-color: #198754;
 }

@@ -194,7 +194,7 @@
         pdf.setFontSize(16);
         pdf.text("Apollo XIII Store", 45, y + 10);
         pdf.setFontSize(10);
-        pdf.text("Tacloban City, Leyte", 45, y + 16);
+        pdf.text("906 Jose Riel Street Sawang Carigara, Leyte", 45, y + 16);
 
         // Current Date
         const today = new Date();

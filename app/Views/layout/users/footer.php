@@ -11,11 +11,10 @@
         <p class="mb-0 small">Email: apolloxiii@gmail.com</p>
       </div>
 
-`
       <!-- Social Media -->
       <div class="col-md-4 mb-3 text-md-end">
         <h6 class="fw-semibold">Follow Us</h6>
-        <a href="https://www.facebook.com/profile.php?id=61577788491769" class="text-white fs-5 me-2"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.facebook.com/people/Apollo-XIII-Pastry-Shop/61577788491769/" class="text-white fs-5 me-2"><i class="bi bi-facebook"></i></a>
         <a href="#" class="text-white fs-5 me-2"><i class="bi bi-instagram"></i></a>
       </div>
     </div>
