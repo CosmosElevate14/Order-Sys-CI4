@@ -1,0 +1,124 @@
+/* UIstyles.css */
+
+/* ========== Global Styles ========== */
+body {
+  /* Background: Warmer gradient from a soft peach to your existing light yellow */
+  background: linear-gradient(135deg, #FFDAB9, #f8e38f); /* #FFDAB9 (Soft Peach) to #f8e38f (your current start) */
+
+  /* Font: Prioritize Poppins for a modern, friendly feel, with Segoe UI as fallback */
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+
+  /* Default Text Color: Rich Chocolate Brown for excellent readability and theme consistency */
+  color: #6B4423; /* Rich Chocolate Brown */
+
+  /* Ensure the body takes at least the full viewport height */
+  min-height: 100vh;
+
+  /* Prevent horizontal scrolling if content overflows */
+  overflow-x: hidden;
+
+  /* Optional: Add a subtle text shadow for a little depth, complementing the warm theme */
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); /* Soft white shadow */
+}
+
+/* ========== Navbar ========== */
+.navbar {
+  background-color: #ffffffee !important;
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-brand span {
+  font-size: 1.5rem;
+  color: #e06b28 !important;
+}
+
+.navbar .btn-light:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+/* ========== Buttons ========== */
+.btn-primary,
+.btn-success {
+  border-radius: 30px;
+  font-weight: 600;
+  padding: 8px 24px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cart-hover {
+    transition: box-shadow 0.3s ease;
+}
+
+.cart-hover:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: #f97316;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #fb923c;
+  transform: translateY(-2px);
+}
+
+.btn-success {
+  background-color: #22c55e;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #4ade80;
+  transform: translateY(-2px);
+}
+
+/* ========== Cards & Modals ========== */
+.card, .modal-content {
+  background-color: #ffffffee;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+}
+
+/* ========== Dropdown Menu ========== */
+.dropdown-menu {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.dropdown-menu .dropdown-item {
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #fff4ec;
+  color: #d97706;
+  font-weight: 500;
+}
+
+/* ========== Notification & Cart Badges ========== */
+.badge {
+  font-size: 10px;
+  padding: 4px 6px;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+/* ========== Utility ========== */
+.shadow-soft {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05) !important;
+}
+
+.rounded-pill-lg {
+  border-radius: 50rem !important;
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}

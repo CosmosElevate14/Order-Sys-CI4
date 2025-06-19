@@ -1,41 +1,72 @@
 <section class="container d-flex flex-column align-items-center justify-content-center" style="min-height: 100dvh;">
-    <img class="img-fluid" style="width: 150px;" src="<?= base_url('/upload/logo2.png') ?>" alt="Apollo XII Logo">
-    <h3>Apollo XIII Registration</h3>
-    <div class="container w-50 mt-4 p-2">
+    <img class="img-fluid mb-3" style="width: 150px;" src="<?= base_url('/upload/logo2.png') ?>" alt="Apollo XII Logo">
+    <h3 class="fw-bold text-primary">Apollo XIII Pastry Shop Registration</h3>
+
+    <div class="container p-4 mt-4 shadow-lg rounded bg-white" style="max-width: 600px;">
         <form action="<?= site_url('/register') ?>" method="post">
             <?= csrf_field() ?>
-            <div class="row">
-                <div class="col form-floating mb-3" >
-                    <input type="text" name="firstname" class="form-control" id="floatingInput" placeholder="Mike">
-                    <label class="ms-2" for="floatingInput">First Name</label>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="firstname" class="form-label">First Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                        <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Juan" required>
+                    </div>
                 </div>
-                <div class="col form-floating mb-3" >
-                    <input type="text" name="lastname" class="form-control" id="floatingInput" placeholder="Enriquez" >
-                    <label class="ms-2" for="floatingInput">Last Name</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col form-floating mb-3" >
-                    <input type="text" name="address" class="form-control" id="floatingInput" placeholder="Block 29 Side Street" >
-                    <label class="ms-2" for="floatingInput">Address</label>
-                </div>
-                <div class="col form-floating mb-3" >
-                    <input type="text" name="contact" class="form-control" id="floatingInput" placeholder="0912398123" >
-                    <label class="ms-2" for="floatingInput">Contact Number</label>
+                <div class="col-md-6">
+                    <label for="lastname" class="form-label">Last Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enriquez" required>
+                    </div>
                 </div>
             </div>
-            <div class="form-floating mb-3">
-                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email</label>
+
+            <div class="row g-3 mt-2">
+                <div class="col-md-6">
+                    <label for="address" class="form-label">Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
+                        <input type="text" name="address" id="address" class="form-control" placeholder="Block 29 Side Street" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="contact" class="form-label">Contact Number</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
+                        <input type="text" name="contact" id="contact" class="form-control" placeholder="09123456789" required>
+                    </div>
+                </div>
             </div>
-            <div class="form-floating mb-3">
-                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
+
+            <div class="mt-3">
+                <label for="email" class="form-label">Email</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="name@example.com" required>
+                </div>
             </div>
-            <p>Already have an account? Login <a href="<?= site_url('/login') ?>">here</a></p>
-            <button type="submit" class="btn btn btn-primary btn-block w-100">Register</button>
-            <a role="button" href="<?= site_url('/home') ?>" class="btn btn btn-secondary mt-3 btn-block w-100">Back to Home</a>
+
+            <div class="mt-3">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="•••••••" required>
+                </div>
+            </div>
+
+            <p class="text-center mt-3 mb-0">
+                Already have an account? <a href="<?= site_url('/login') ?>" class="text-decoration-none fw-semibold">Login here</a>
+            </p>
+
+            <button type="submit" class="btn btn-primary w-100 mt-3 fw-bold">
+                <i class="bi bi-person-plus-fill me-2"></i>Register
+            </button>
+
+            <a href="<?= site_url('/home') ?>" class="btn btn-secondary w-100 mt-2 fw-bold">
+                <i class="bi bi-house-fill me-2"></i>Back to Home
+            </a>
         </form>
-        
     </div>
 </section>

@@ -31,6 +31,7 @@
                     <div class="d-flex align-items-center justify-content-between pe-3">
                         <form class="my-4 w-25" action="<?= site_url('admin/orders/Pending') ?>" method="Get">
                             <div class="d-flex align-items-center gap-2">
+                                <label for="searchGcash">Search GCash Transaction ID</label>
                                 <input type="text" name="searchGcash" id="searchGcash" class="form-control">
                                 <button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-search"></i></button>
                             </div>
@@ -55,7 +56,7 @@
                     </form>
                 <?php endif; ?>
                 <?php if (!empty($orders)): ?>
-                <table class="table table-striped table-bordered">
+                <table class="table table-bordered align-middle text-center border-dark">
                     <thead>
                         <th>Order ID</th>
                         <th>Customer</th>
@@ -137,21 +138,12 @@
                                         >
                                             <span class="bi bi-check2-circle"></span> Done
                                         </a>
-                                    <?php elseif (strtolower($status) === 'declined'): ?>
-                                        <a href="<?= site_url('admin/order/unpaid/' . $order['id']) ?>" class="btn btn-warning btn-sm">
-                                            <span class="bi bi-wallet"></span> Not Paid
-                                        </a>
                                     <?php elseif (strtolower($status) === 'confirmed'): ?>
                                         <a href="<?= site_url('admin/order/pay/' . $order['id']) ?>" class="btn btn-primary btn-sm">
                                             <span class="bi bi-wallet"></span> Paid
                                         </a>
                                         <a href="<?= site_url('admin/order/ready/' . $order['id']) ?>" class="btn btn-success btn-sm">
                                             <span class="bi bi-envelope"></span> Product Ready213
-                                        </a>
-                                    <?php elseif (strtolower($status) === 'declined'): ?>
-
-                                        <a href="<?= site_url('admin/order/unpaid/' . $order['id']) ?>" class="btn btn-warning btn-sm">
-                                            <span class="bi bi-wallet"></span> Not Paid
                                         </a>
                                     <?php endif; ?>
                                     <!-- View Button -->

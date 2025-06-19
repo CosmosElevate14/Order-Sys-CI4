@@ -39,7 +39,7 @@
             <div style="margin-top:10px;">
                 <?php if (!empty($orders)): ?>
                     <div id="salesTable">
-                        <table class="table table-bordered table-striped ">
+                        <table class="table table-bordered align-middle text-center border-dark">
                             <thead>
                                 <th>Order ID</th>
                                 <th>Customer Name</th>

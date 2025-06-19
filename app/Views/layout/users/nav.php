@@ -1,49 +1,72 @@
-<nav class="navbar navbar-expand-lg mx-3 px-5 mt-3">
-            <div class="container-fluid">
+<nav class="navbar navbar-expand-lg mx-3 px-4 mt-4 rounded shadow-lg bg-white border border-1 border-opacity-25">
+    <div class="container-fluid">
+        <!-- Logo & Brand -->
+        <a class="navbar-brand d-flex align-items-center gap-3 text-primary" href="<?= site_url('/home') ?>">
+            <img src="<?= base_url('/upload/logo.png') ?>" alt="Apollo XIII Logo"
+                class="img-fluid" style="max-width: 120px; min-width: 120px;">
+            <span class="fw-bold fs-4">Apollo XIII Pastry Shop</span>
+        </a>
 
-                <a class="navbar-brand text-primary" href="<?= site_url('/home') ?>">
-                    <img class="w-25 rounded img-fluid" src="<?= base_url('/upload/logo.png') ?>" alt="">
-                    Apollo XIII Store
-                </a>
-                <div class="d-flex w-100">
-                    
-                    <div class="d-flex align-items-center mb-0 gap-3 fs-4 pe-2 ms-auto">
-                        
-                        <?php if (session()->get('isLoggedIn')): ?>
-                            <a role="button" class="text-dark position-relative btn btn-lg" href="<?= site_url('/notification') ?>">
-                                <i class="bi bi-bell"></i>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-7" style="font-size: 10px;">
-                                    <?= esc($notificationCount) ?>
-                                </span>
-                            </a>
-                            <a role="button" class="text-dark position-relative btn btn-lg" href="<?= site_url('/cart') ?>">
-                                <i class="bi bi-cart"></i>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-7" style="font-size: 10px;">
-                                    <?= esc($countItems) ?>
-                                </span>
-                            </a>
-                            <ul class="navbar-nav me-5">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle fs-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="bi bi-person fs-4"></i> <?= esc(session()->get('name')) ?>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="<?= site_url('/profile') ?>">Profile</a></li>
-                                        <li><a class="dropdown-item text-danger" href="<?= site_url('/user/logout') ?>">Logout</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <?php else: ?>
-                                <ul class="navbar-nav fs-5">
-                                    <li class="nav-item me-2">
-                                        <a role="button" class="btn btn-primary" href="<?= site_url('/register') ?>">Register</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a role="button" class="btn btn-success" href="<?= site_url('/login') ?>">Login</a>
-                                    </li>
-                                </ul>
-                            <?php endif; ?>
+        <!-- Toggler for small devices -->
+        <button class="navbar-toggler shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Right Side of Navbar -->
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <div class="ms-auto d-flex align-items-center gap-3">
+                
+                <?php if (session()->get('isLoggedIn')): ?>
+
+                    <!-- 🔔 Notification -->
+                    <a href="<?= site_url('/notification') ?>" class="btn btn-light position-relative rounded-circle shadow-sm"
+                       style="width: 42px; height: 42px;">
+                        <i class="bi bi-bell fs-5 text-dark"></i>
+                        <?php if ($notificationCount > 0): ?>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                  style="font-size: 0.65rem;">
+                                <?= esc($notificationCount) ?>
+                            </span>
+                        <?php endif; ?>
+                    </a>
+
+                    <!-- 🛒 Cart -->
+                    <a href="<?= site_url('/cart') ?>" class="btn btn-light position-relative rounded-circle shadow-sm"
+                       style="width: 42px; height: 42px;">
+                        <i class="bi bi-cart fs-5 text-dark"></i>
+                        <?php if ($countItems > 0): ?>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                  style="font-size: 0.65rem;">
+                                <?= esc($countItems) ?>
+                            </span>
+                        <?php endif; ?>
+                    </a>
+
+                    <!-- 👤 Profile Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle fw-medium px-3 rounded-pill" type="button"
+                                id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle me-1"></i><?= esc(session()->get('name')) ?>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="<?= site_url('/profile') ?>"><i class="bi bi-person-lines-fill me-2"></i>Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="<?= site_url('/user/logout') ?>"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                        </ul>
                     </div>
-                </div>
+
+                <?php else: ?>
+                    <!-- 📝 Register & 🔓 Login -->
+                    <a href="<?= site_url('/register') ?>" class="btn btn-outline-primary rounded-pill fw-semibold px-4 shadow-sm">
+                        <i class="bi bi-person-plus-fill me-1"></i> Register
+                    </a>
+                    <a href="<?= site_url('/login') ?>" class="btn btn-success rounded-pill fw-semibold px-4 shadow-sm">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Login
+                    </a>
+                <?php endif; ?>
+
             </div>
-        </nav>
+        </div>
+    </div>
+</nav>
