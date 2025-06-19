@@ -17,6 +17,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <style>
+        .disabled-link {
+            pointer-events: none;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+    </style>
+
 </head>
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
 

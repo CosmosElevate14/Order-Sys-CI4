@@ -6,7 +6,7 @@ class OrderModel extends Model
 {
     protected $table = 'orders';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['customer_id', 'order_type', 'quantity', 'total', 'order_status', 'payment_status'];
+    protected $allowedFields = ['customer_id', 'order_type', 'quantity', 'total', 'order_status', 'desired_date', 'desired_time', 'transaction_id', 'payment_status'];
 
 
     public function countItems() {
@@ -19,7 +19,7 @@ class OrderModel extends Model
 
     public function getTotalSales(){
         return $this->selectSum('total')
-                ->where('payment_status', 'Complete')
+                ->where('order_status', 'Done')
                 ->get()
                 ->getRow()
                 ->total;

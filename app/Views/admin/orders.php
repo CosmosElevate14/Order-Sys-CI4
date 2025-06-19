@@ -1,4 +1,3 @@
-
 <main class="app-main">
     <div class="app-content-header">
         <div class="container-fluid">
@@ -27,21 +26,30 @@
 
     <div class="app-content">
         <div class="container-fluid">
+            <?php if (strtolower($status) === 'pending'): ?>
+                <div class="">
+                    <div class="d-flex align-items-center justify-content-between pe-3">
+                        <form class="my-4 w-25" action="<?= site_url('admin/orders/Pending') ?>" method="Get">
+                            <div class="d-flex align-items-center gap-2">
+                                <input type="text" name="searchGcash" id="searchGcash" class="form-control">
+                                <button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-search"></i></button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <div style="margin-top:10px;">
                 <?php if (strtolower($status) === 'confirmed'): ?>
-                    <form id="filterForm" class="row g-2 mb-3 no-print">
+                    <form action="<?= site_url('admin/orders/Confirmed') ?>" method="get" class="row g-2 mb-3 no-print">
                         <div class="col-md-3">
                             <label for="filterDate">Select Date</label>
-                            <input type="date" id="filterDate" class="form-control" required>
+                            <input type="date" id="filterDate" name="filterDate" class="form-control">
                         </div>
                         <div class="col-md-1 d-flex align-items-end">
                             <button class="btn btn-primary btn-sm" type="submit" title="Filter">
                                 <i class="bi bi-funnel"></i>
-                            </button>
-                        </div>
-                        <div class="col-md-3 d-flex align-items-end">
-                            <button type="button" onclick="downloadPDF()" class="btn btn-danger">
-                                <i class="bi bi-file-earmark-pdf"></i> Download PDF
                             </button>
                         </div>
                     </form>
@@ -77,7 +85,7 @@
                                 ?>
                                 <span class="badge text-bg-warning"><?= $order['payment_status'] ?></span>
                                 <?php 
-                                elseif ($order['payment_status'] == 'Paid'):
+                                elseif ($order['payment_status'] == 'Confirmed'):
                                 ?>
                                     <span class="badge text-bg-success"><?= $order['payment_status'] ?></span>
                                 <?php 
@@ -92,35 +100,13 @@
                                     <?= esc($order['customer']['first_name'] ?? '') ?>
                                     <?= esc($order['customer']['last_name'] ?? '') ?>
                                 </td>
-                                <td><?= esc($order['order_type']) . ' ' . esc($order['payment_status']) ?></td>
+                                <td><?= esc($order['order_type']) ?></td>
                                 <td><?= esc($order['quantity']) ?></td>
                                 <td>&#x20B1;<?= esc($order['total']) ?></td>
                                 <td>
                                     <?= esc($order['transaction_id'] ?? 'N/A') ?>
 
                                     <?php if (!empty($order['transaction_id'])): ?>
-                                        <!-- Search input to verify GCash Transaction ID -->
-                                        <input
-                                            type="text"
-                                            class="form-control form-control-sm d-inline-block"
-                                            style="width: 150px; margin-left: 10px;"
-                                            placeholder="Search GCash ID"
-                                            oninput="checkGCashMatch(this, '<?= esc($order['transaction_id']) ?>')"
-                                        >
-                                        <span class="badge bg-secondary" id="status-<?= esc($order['id']) ?>" style="margin-left: 5px;">Waiting</span>
-
-                                        <script>
-                                            function checkGCashMatch(input, actualID) {
-                                                const statusSpan = input.nextElementSibling;
-                                                if (input.value.trim() === actualID) {
-                                                    statusSpan.textContent = "Matched (Paid)";
-                                                    statusSpan.className = "badge bg-success";
-                                                } else {
-                                                    statusSpan.textContent = "Not Matched";
-                                                    statusSpan.className = "badge bg-danger";
-                                                }
-                                            }
-                                        </script>
                                     <?php endif; ?>
                                 </td>
                                 <td><?= esc($order['desired_time']) ?></td>
@@ -139,14 +125,19 @@
                                         </a>
                                         
                                     <?php elseif (strtolower($status) === 'confirmed'): ?>
-                                        <a href="<?= site_url('admin/order/ready/' . $order['id']) ?>" class="btn btn-success btn-sm">
+                                        <a href="<?= site_url('admin/order/ready/' . $order['id']) ?>" class="btn btn-primary btn-sm">
                                             <span class="bi bi-box-seam"></span> Product Ready
                                         </a>
-                                        <a href="<?= site_url('admin/order/complete/' . $order['id']) ?>" class="btn btn-secondary btn-sm">
+                                        <a href="<?= site_url('admin/order/complete/' . $order['id']) ?>" role="button" class="btn btn-success btn-sm <?php
+                                            if (strtolower($order['order_status']) != 'ready') {
+                                                ?>disabled-link
+                                            <?php
+                                            }
+                                        ?>"
+                                        >
                                             <span class="bi bi-check2-circle"></span> Done
                                         </a>
                                     <?php elseif (strtolower($status) === 'declined'): ?>
-
                                         <a href="<?= site_url('admin/order/unpaid/' . $order['id']) ?>" class="btn btn-warning btn-sm">
                                             <span class="bi bi-wallet"></span> Not Paid
                                         </a>

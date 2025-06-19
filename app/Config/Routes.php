@@ -29,7 +29,7 @@ $routes->get('admin/order/decline/(:num)', [Admin::class, 'declineOrder/$1']);
 $routes->get('admin/order/ready/(:num)', [Admin::class, 'orderReady/$1']);
 $routes->get('admin/order/pay/(:num)', [Admin::class, 'payOrder/$1']);
 $routes->get('admin/order/unpaid/(:num)', [Admin::class, 'unpaidOrder/$1']);
-
+$routes->get('admin/order/complete/(:num)', [Admin::class, 'completeOrder/$1']);
 // Customers
 $routes->get('admin/customers', [Admin::class, 'customers']);
 
@@ -48,6 +48,7 @@ $routes->match(['GET', 'POST'], '/home', [Users::class, 'home']);
 $routes->get('/cart', [Users::class, 'cart']);
 $routes->match(['GET', 'POST'], '/cart/add', [Users::class, 'addToCart']);
 $routes->match(['GET', 'POST'], '/cart/checkout', [Users::class, 'checkout']);
+
 // 👇 NEW: Update quantity and remove item from cart
 $routes->post('/cart/update', [Users::class, 'updateQuantity']);
 $routes->get('/cart/remove/(:num)', [Users::class, 'removeItem/$1']);

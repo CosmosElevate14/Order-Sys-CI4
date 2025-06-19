@@ -27,7 +27,7 @@ class Admin extends Controller
         // Pending orders count
         $pendingOrders = 0;
         try {
-            $query = $db->table('orders')->where('order_status', 'Pending')->countAllResults();
+            $query = $db->table('orders')->where('payment_status', 'Pending')->countAllResults();
             $pendingOrders = $query;
         } catch (DatabaseException $e) {
             // handle error if needed
@@ -227,9 +227,22 @@ class Admin extends Controller
         $customerModel = new CustomerInformationModel();
         $orderDetailsModel = new OrderDetailsModel();
         $productModel = new ProductsModel();
+        
+        $query = $orderModel
+        ->where('payment_status', $status)
+        ->where('order_status !=', 'Done');
 
-        $orders = $orderModel->where('order_status', $status)->findAll();
+        // ✅ If Confirmed and date is provided in GET
+        if (strtolower($status) == 'confirmed' && $this->request->getGet('filterDate')) {
+            $date = $this->request->getGet('filterDate');
+            $query->where('desired_date', $date); 
+        } elseif (strtolower($status) == 'pending' && $this->request->getGet('searchGcash')) {
+            $search = $this->request->getGet('searchGcash');
+            $query->like('transaction_id', $search);
+        }
 
+        $orders = $query->findAll();
+        log_message('debug', 'Order Status ' . $status);
         foreach ($orders as &$order) {
             $order['customer'] = $customerModel->find($order['customer_id']);
             $details = $orderDetailsModel->where('order_id', $order['id'])->findAll();
@@ -274,7 +287,7 @@ class Admin extends Controller
         $email->setMessage('Dear ' . esc($customer['first_name']) . ',<br>Your order #' . $orderId . ' has been <b>confirmed</b>.');
 
         if ($email->send()) {
-            $orderModel->update($orderId, ['order_status' => 'Confirmed']);
+            $orderModel->update($orderId, ['payment_status' => 'Confirmed']);
             session()->setFlashdata('success', 'Order confirmed and email sent.');
         } else {
             $debugInfo = $email->printDebugger(['headers', 'subject', 'body']);
@@ -300,7 +313,7 @@ class Admin extends Controller
         $email->setMessage('Dear ' . esc($customer['first_name']) . ',<br>Your order #' . $orderId . ' has been <b>declined</b>.');
 
         if ($email->send()) {
-            $orderModel->update($orderId, ['order_status' => 'Declined']);
+            $orderModel->update($orderId, ['payment_status' => 'Declined']);
             session()->setFlashdata('success', 'Order declined and email sent.');
         } else {
             $debugInfo = $email->printDebugger(['headers', 'subject', 'body']);
@@ -313,6 +326,7 @@ class Admin extends Controller
 
     public function orderReady($orderId) {
         $session = session();
+        $orderModel = new OrderModel();
         $db = \Config\Database::connect();
         $email = \Config\Services::email();
 
@@ -330,7 +344,7 @@ class Admin extends Controller
 
         $subject = '';
         $message = '';
-
+        $orderModel->update($orderId, ['order_status' => 'Ready']);
         if ($order['order_type'] === 'pickup') {
             $subject = 'Your Order is Ready for Pickup';
             $message = "Hi {$order['first_name']},<br><br>Your order (Order ID: {$order['id']}) is now ready for pickup. Please proceed to the pickup area at your convenience.";
@@ -385,6 +399,22 @@ class Admin extends Controller
         return redirect()->back();
     }
 
+    public function completeOrder($orderID) {
+        $session = session();
+        $orderModel = new OrderModel();
+
+        $order = $orderModel->find($orderID);
+        if (!$order) {
+            $session->setFlashdata('error', 'Order not found.');
+            return redirect()->back();
+        }
+        
+        $orderModel->update($orderID, ['order_status' => 'Done']);
+        
+        $session->setFlashdata('success', 'Order marked as Done.');
+        return redirect()->back();
+    }
+
     public function customers(){
         $session = session();
         $customers = new UserAccountModel();
@@ -419,12 +449,12 @@ class Admin extends Controller
 
         if (!empty($date)) {
             $orders = $orderModel
-                ->where('payment_status', 'Complete')
+                ->where('order_status', 'Done')
                 ->where('DATE(created_at)', $date) // MySQL DATE() function
                 ->findAll();
         } else {
             $orders = $orderModel
-                ->where('payment_status', 'Complete')
+                ->where('order_status', 'Done')
                 ->findAll();
         }
 

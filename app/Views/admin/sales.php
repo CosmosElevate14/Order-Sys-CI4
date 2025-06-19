@@ -52,10 +52,10 @@
                                 <?php foreach ($orders as $order): ?>
                                     <tr>
                                         <td><?= esc($order['id']) ?> 
-                                            <?php if ($order['payment_status']): ?>
-                                                <span class="badge text-bg-secondary"> <?= esc($order['payment_status']) ?></span>
+                                            <?php if ($order['order_status']): ?>
+                                                <span class="badge text-bg-success"> <?= esc($order['order_status']) ?></span>
                                             <?php endif; ?>
-                                        <?= esc($order['payment_status']) ?>
+                                        <!-- <?= esc($order['order_status']) ?> -->
                                         </td>
                                         <td>
                                             <?= esc($order['customer']['first_name'] ?? '') ?>
