@@ -39,14 +39,18 @@
             <div style="margin-top:10px;">
                 <?php if (!empty($orders)): ?>
                     <div id="salesTable">
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-bordered">
                             <thead>
                                 <th>Order ID</th>
-                                <th>Customer</th>
+                                <th>Customer Name</th>
                                 <th>Order Type</th>
-                                <th>Quantity</th>
+                                <th>Item Ordered and Quantity</th>
+                                <!-- <th>Date Ordered</th> -->
+                                <th>Desired Date</th>
+                                <th>Desired Time</th>
+                                <th>Delivery Address</th>
                                 <th>Total</th>
-                                <th class="no-print">Action</th>
+                                <!-- <th class="no-print">Action</th> -->
                             </thead>
                             <tbody>
                                 <?php foreach ($orders as $order): ?>
@@ -62,13 +66,28 @@
                                             <?= esc($order['customer']['last_name'] ?? '') ?>
                                         </td>
                                         <td><?= esc($order['order_type']) ?></td>
-                                        <td><?= esc($order['quantity']) ?></td>
+                                        <td>
+                                            <ul class="list-group">
+                                                <?php foreach ($order['details'] as $detail): ?>
+                                                    <li class="list-group-item"><?= esc($detail['product_name'] ?? 'N/A') ?> - <?= esc($detail['quantity']) ?></li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <?= esc($order['desired_date'] ?? '') ?>
+                                        </td>
+                                        <td>
+                                            <?= esc($order['desired_time'] ?? '') ?>
+                                        </td>
+                                        
+                                        <td><?= esc($order['customer']['address'] ?? 'N/A') ?></td>
+                                        <!-- <td><?= esc($order['quantity']) ?></td> -->
                                         <td>&#x20B1;<?= esc($order['total']) ?></td>
-                                        <td class="no-print">
+                                        <!-- <td class="no-print">
                                             <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#viewOrderModal<?= $order['id'] ?>">
                                                 <span class="bi bi-eye"></span> View
                                             </button>
-                                        </td>
+                                        </td> -->
                                     </tr>
         
                                     
